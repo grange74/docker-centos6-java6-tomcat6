@@ -4,15 +4,14 @@ MAINTAINER Nicolas Grange "grange74@gmail.com"
 # Download the latest Tomcat 6 and copy to /usr/local
 # The following commands are chained to keep the image size as small as possible
 # It does unfortunately make it less readable so i try to explain each step:
-# 1. download/install wget & tar
+# 1. download/install tar
 # 2. download latest tomcat 6 from trusted mirror
 # 3. untar the tomcat6.tar.gz
 # 4. delete the tomcat6.tar.gz
 # 5 & 6. Remove unnecessary webapps that come with Tomcat
 # 7. Move the tomcat6 folder to where we will run it from
-# 8. Uninstall wget & tar
-# 9. ask yum to clean itself up
-RUN yum -y install wget tar && \
+# 8. ask yum to clean itself up
+RUN yum -y install tar && \
 	wget "http://apache.mirror.uber.com.au/tomcat/tomcat-6/v6.0.41/bin/apache-tomcat-6.0.41.tar.gz" \
          -O /apache-tomcat-6.0.41.tar.gz && \
 	tar xvzf /apache-tomcat-6.0.41.tar.gz && \
@@ -20,7 +19,6 @@ RUN yum -y install wget tar && \
 	rm -rf /apache-tomcat-6.0.41/webapps/docs && \
 	rm -rf /apache-tomcat-6.0.41/webapps/examples && \
 	mv /apache-tomcat-6.0.41/ /usr/local/ && \	
-	yum -y remove wget tar && \
 	yum clean all
 	
 # Need this to avoid the following message:
