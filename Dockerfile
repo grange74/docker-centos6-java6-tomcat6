@@ -29,6 +29,9 @@ RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.
 	yum -y install tomcat-native && \
 	yum clean all
 
+# Overwrite the default to set a user/password for Tomcat manager
+ADD tomcat-users.xml /usr/local/apache-tomcat-6.0.41/conf/tomcat-users.xml
+
 # TODO enable SSL by creating a key, moving it to right tomcat location and edit server.xml
 # RUN keytool -genkey -alias tomcat -keyalg RSA
 # RUN mv /root/.keystore /usr/share/tomcat6/
